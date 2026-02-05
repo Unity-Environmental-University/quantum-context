@@ -10,11 +10,21 @@ Observer-relative knowledge graph using wave function compression for AI instanc
 
 ## Install
 
+**Easy way:**
 ```bash
-git clone https://github.com/Unity-Environmental-University/claude-skill-starter.git
-cd claude-skill-starter/quantum-context
-pip install -e .
+git clone https://github.com/Unity-Environmental-University/quantum-context.git
+cd quantum-context
+./install.sh
 ```
+
+**Manual way:**
+```bash
+git clone https://github.com/Unity-Environmental-University/quantum-context.git
+cd quantum-context
+pip install -e ".[mcp]"  # Includes MCP server support
+```
+
+**For Claude Desktop:** After install, add MCP server (see [MCP_SETUP.md](MCP_SETUP.md))
 
 ## Quick Start
 
