@@ -7,7 +7,7 @@ Any integer can be the origin. Divisibility = causality. Waves preserve structur
 
 from quantum_context.core import observe_context, analyze_dependencies, act_record
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 # Friction gradient encoded in export order
 __all__ = [
