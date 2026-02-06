@@ -186,6 +186,35 @@ act_record("claude-instance-2026-02-05", "tends-to",
 
 Future instances can read this and know the previous instance's capabilities, uncertainties, and biases.
 
+## Related Work
+
+quantum-context builds on ideas from several research areas:
+
+**Information Geometry:**
+- [Ariel Caticha - Entropic Dynamics](https://www.arielcaticha.com/entropic-dynamics-quantum-mechanics) - Derives quantum mechanics from information geometry
+- [Information Geometry of Hyperbolic Distributions (2024)](https://link.springer.com/article/10.1007/s41884-024-00158-9) - Recent work on hyperbolic information spaces
+
+**Hyperbolic Embeddings:**
+- [Poincaré Embeddings (Nickel & Kiela, 2017)](https://arxiv.org/abs/1705.08039) - Hierarchical representations in hyperbolic space
+- [Simulating CFT on Hyperbolic Lattices (2024)](https://patrick-lenggenhager.github.io/assets/papers/PhysRevLett.133.061603.pdf) - Lattice holography
+
+**Quantum Geometry:**
+- [Hidden Quantum Geometry Discovered (Jan 2026)](https://www.sciencedaily.com/releases/2026/01/260131084616.htm) - Experimental confirmation of quantum geometric effects
+- [Space Emerging from Quantum Mechanics (Sean Carroll)](https://www.preposterousuniverse.com/blog/2016/07/18/space-emerging-from-quantum-mechanics/) - Entanglement → spacetime
+
+**Computational Universe:**
+- [Wolfram Physics Project - The Ruliad](https://writings.stephenwolfram.com/2021/11/the-concept-of-the-ruliad/) - Universe as computational hypergraph
+- [Computational Irreducibility](https://en.wikipedia.org/wiki/Computational_irreducibility) - Connection to Gödel incompleteness
+
+**Knowledge Graphs for AI:**
+- [Knowledge Graphs Reshaping AI (2025-2026)](https://beam.ai/agentic-insights/5-ways-knowledge-graphs-are-quietly-reshaping-ai-workflows-in-2025-2026) - Context preservation for agents
+- [AI Scaling via Contextual Intelligence (2026)](https://siliconangle.com/2026/01/18/2026-data-predictions-scaling-ai-agents-via-contextual-intelligence/) - Current industry focus
+
+**Novel Contribution:**
+This project connects divisibility structure on integers (ℤ) to information geometry, showing that correlation on measurement graphs preserves divisibility relationships without computing primes. The practical tool enables AI continuity across sessions using this implicit structure.
+
+See [THEORY.md](THEORY.md) for honest assessment of what's proven vs conjectured.
+
 ## Status
 
 **Alpha (0.2.0)** - Working implementation with correlation-based independence detection. Core functionality solid, API may evolve. Safe for experimentation and research.
