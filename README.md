@@ -10,23 +10,25 @@ Observer-relative knowledge graph using wave function compression for AI instanc
 
 ## Install
 
-**Easy way:**
+**From PyPI (recommended):**
 ```bash
-git clone https://github.com/Unity-Environmental-University/quantum-context.git
-cd quantum-context
-./install.sh
+pip install quantum-context              # Core library
+pip install quantum-context[mcp]        # With MCP server support
+pip install quantum-context[dev]        # With dev tools
 ```
 
-**Manual way:**
+**From source:**
 ```bash
 git clone https://github.com/Unity-Environmental-University/quantum-context.git
 cd quantum-context
-pip install -e ".[mcp]"  # Includes MCP server support
+pip install -e ".[mcp]"  # Editable install with MCP support
 ```
 
 **For Claude Desktop:** After install, add MCP server (see [MCP_SETUP.md](MCP_SETUP.md))
 
 ## Quick Start
+
+### As a Library
 
 ```python
 from quantum_context import observe_context, analyze_dependencies, act_record
@@ -47,6 +49,26 @@ amplitude = observe_context("skill-starter-template")
 
 deps = analyze_dependencies("skill-starter-template")
 # → depends_on: ["complete", "friction-gradient-philosophy"]
+# → independent_of: ["unrelated-concepts"]
+```
+
+### As a CLI Tool
+
+```bash
+# Observe context
+quantum-context observe auth
+
+# Analyze dependencies
+quantum-context analyze auth
+
+# Record a measurement
+quantum-context record auth requires identity --confidence 0.8
+
+# List all measurements
+quantum-context list
+
+# Export as JSON
+quantum-context export --format json
 ```
 
 ## Key Features
@@ -121,23 +143,25 @@ Each line is a JSON measurement:
 ❌ **NOT for medical/financial** - Confidence levels too low
 ❌ **NOT real-time** - Wave fitting takes time
 
-## What's Implemented vs Stubbed
+## What's Implemented
 
-**Working now:**
+**Working now (v0.2.0):**
 - ✅ NDJSON storage
 - ✅ Record measurements with confirmation
 - ✅ Observe context (read measurements)
 - ✅ Analyze dependencies (find related concepts)
+- ✅ **Independence detection** via correlation (no prime computation!)
 - ✅ Confidence ceiling enforcement
 - ✅ Evidence-based confidence boost
 - ✅ Observer attribution
+- ✅ CLI interface
 
-**Stubbed (future):**
-- ⏳ Wave function fitting (currently just averages confidence)
-- ⏳ Interference calculations (|ψ(A)·ψ(B)|²)
-- ⏳ Frame transformations (different observer perspectives)
+**Future enhancements:**
+- ⏳ Wave function fitting (currently uses correlation as proxy)
+- ⏳ Explicit interference calculations (|ψ(A)·ψ(B)|²)
+- ⏳ Observer frame comparison
 - ⏳ Confidence decay over time
-- ⏳ Orthogonality detection (independent concepts)
+- ⏳ Temporal tracking
 
 ## Files
 
@@ -164,7 +188,7 @@ Future instances can read this and know the previous instance's capabilities, un
 
 ## Status
 
-**Alpha (0.1.0)** - Minimal working implementation. Wave function math is stubbed. Use for experimentation only.
+**Alpha (0.2.0)** - Working implementation with correlation-based independence detection. Core functionality solid, API may evolve. Safe for experimentation and research.
 
 ## License
 
