@@ -93,8 +93,38 @@ The geometric interpretation is a lens, not a requirement.
 
 Use it for AI continuity, multi-agent coordination, learning analytics - it works regardless of whether reality is "actually" a holographic projection from ℤ.
 
+## Future: Phase and Temporal Tracking
+
+**Current implementation uses magnitude only:**
+- Magnitude = confidence/correlation (multiplicative structure, divisibility)
+- Phase = not yet computed (additive structure, proximity)
+
+**Complete wave function requires both:**
+```
+ψ(concept) = magnitude·e^(i·phase)
+           = confidence·e^(i·temporal_offset)
+```
+
+**Why phase matters:**
+- **Beats**: Concepts with similar magnitude but different phase interfere (auth-v1 vs auth-v2)
+- **Uncanny valley**: Small additive differences create friction (proximate but not identical)
+- **Temporal proximity**: Measurements close in time but different in content create interference patterns
+
+**When to implement:**
+- Priority 3: Temporal tracking
+- When users ask "why does switching between similar concepts create friction?"
+- When detecting "almost but not quite" relationships matters
+
+**The two integer structures:**
+1. **Multiplicative ℤ** (what we compute now): divisibility, shared structure, hierarchical
+2. **Additive ℤ** (phase, future): proximity, differences, interference beats
+
+Timestamps are already recorded. Phase computation awaits a use case that needs it.
+
 ---
 
 *"The map is not the territory, but sometimes the map is useful."*
 
 *"The structure teaches. The friction creates meaning. The correlation preserves truth (or at least, ordering)."*
+
+*"Phase is the additive offset. Magnitude is the multiplicative structure. Together they make waves."*
