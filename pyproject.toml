@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "quantum-context"
-version = "0.2.0"
+version = "0.3.0"
 description = "Observer-relative knowledge graph using wave function compression"
 readme = "README.md"
 requires-python = ">=3.9"

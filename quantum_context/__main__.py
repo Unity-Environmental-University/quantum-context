@@ -17,7 +17,7 @@ import json
 import sys
 from pathlib import Path
 
-from quantum_context import observe_context, analyze_dependencies, act_record
+from quantum_context import observe_context, compute_mismatch, analyze_dependencies, act_record
 from quantum_context.core import GRAPH_FILE, _load_all_measurements
 
 
@@ -26,13 +26,49 @@ def cmd_observe(args):
     result = observe_context(args.subject, observer=args.observer)
 
     print(f"Context for '{result.entity}':")
-    print(f"  Magnitude: {result.magnitude:.2f}")
+    print(f"  Magnitude: {result.magnitude:.3f}")
+    if result.phase is not None:
+        print(f"  Phase: {result.phase:.3f} (cycles since last measurement)")
     print(f"  Coefficients: {result.coefficients}")
 
     if result.magnitude == 0:
         print(f"  (No measurements found)")
     else:
-        print(f"\n  Confidence level: {'High' if result.magnitude > 0.7 else 'Moderate' if result.magnitude > 0.4 else 'Low'}")
+        freshness = "fresh" if (result.phase or 0) < 1.0 else "stale"
+        print(f"\n  Confidence: {'High' if result.magnitude > 0.7 else 'Moderate' if result.magnitude > 0.4 else 'Low'} ({freshness})")
+
+
+def cmd_mismatch(args):
+    """Compute expectation mismatch for a subject."""
+    result = compute_mismatch(
+        args.subject,
+        args.expected,
+        observer=args.observer,
+    )
+
+    print(f"Mismatch for '{result['subject']}':")
+    print(f"  Expected magnitude: {result['expected_magnitude']:.3f}")
+    print(f"  Measured magnitude: {result['measured_magnitude']:.3f}")
+    print(f"  Delta: {result['magnitude_delta']:.3f}")
+    print(f"  Phase: {result['phase']:.3f}")
+    print(f"  Interference: {result['interference']:.3f}")
+    print(f"  Stage: {result['stage']}")
+
+    t = result['thresholds']
+    derived = "from data" if t.get("derived") else "default"
+    print(f"\n  Thresholds ({derived}):")
+    print(f"    resynchronized < {t['q1']:.3f} < integrating < {t['q2']:.3f} < load-bearing < {t['q3']:.3f} < denial")
+
+    if result['timescale_seconds'] > 0:
+        ts = result['timescale_seconds']
+        if ts > 86400:
+            print(f"  Timescale: {ts / 86400:.1f} days")
+        elif ts > 3600:
+            print(f"  Timescale: {ts / 3600:.1f} hours")
+        elif ts > 60:
+            print(f"  Timescale: {ts / 60:.1f} minutes")
+        else:
+            print(f"  Timescale: {ts:.1f} seconds")
 
 
 def cmd_analyze(args):
@@ -139,6 +175,12 @@ def main():
     observe_parser.add_argument('subject', help='Subject to observe')
     observe_parser.add_argument('--observer', default='claude', help='Observer frame (default: claude)')
 
+    # mismatch command
+    mismatch_parser = subparsers.add_parser('mismatch', help='Compute expectation vs reality')
+    mismatch_parser.add_argument('subject', help='Subject to check')
+    mismatch_parser.add_argument('expected', type=float, help='Expected magnitude (0.0-1.0)')
+    mismatch_parser.add_argument('--observer', default='claude', help='Observer frame (default: claude)')
+
     # analyze command
     analyze_parser = subparsers.add_parser('analyze', help='Analyze dependencies')
     analyze_parser.add_argument('subject', help='Subject to analyze')
@@ -176,6 +218,7 @@ def main():
     # Route to command handlers
     commands = {
         'observe': cmd_observe,
+        'mismatch': cmd_mismatch,
         'analyze': cmd_analyze,
         'record': cmd_record,
         'list': cmd_list,
